@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 
 @Service(value = "userService")
@@ -42,7 +43,9 @@ public class UserServiceImpl implements UserDetailsService, UserService {
 
 	@Override
 	public void delete(long id) {
-		userDao.delete(id);
+            Optional<User> user = userDao.findById(id);
+//            userDao.delete(id);
+            userDao.delete(user.get());
 	}
 
 	@Override
